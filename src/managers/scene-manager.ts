@@ -2,8 +2,12 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { scene } from "../old/scene";
 
+type Options = {
+  useOrbitControls: boolean;
+};
+
 export class SceneManager {
-  private controls: OrbitControls;
+  private controls?: OrbitControls;
 
   public camera: THREE.PerspectiveCamera;
   public scene: THREE.Scene;
@@ -16,21 +20,24 @@ export class SceneManager {
       0.01,
       1000
     );
-    this.controls = new OrbitControls(
-      this.camera,
-      document.getElementById("canvas") as HTMLCanvasElement
-    );
   }
 
-  initialize() {
+  initialize({ useOrbitControls }: Options) {
     // Initialize lights, camera, and controls
     this.scene.add(new THREE.AmbientLight(0xffffff, 0.7));
     const directionalLight = new THREE.DirectionalLight(0xffffff, 5);
     this.scene.add(directionalLight);
 
     this.camera.position.set(0, 0, 50);
-    this.controls.enableDamping = true;
-    this.controls.target = new THREE.Vector3(0, 0, -100);
+
+    if (useOrbitControls) {
+      this.controls = new OrbitControls(
+        this.camera,
+        document.getElementById("canvas") as HTMLCanvasElement
+      );
+      this.controls.enableDamping = true;
+      this.controls.target = new THREE.Vector3(0, 0, 0);
+    }
 
     this.createFrustumBox();
 
@@ -53,6 +60,6 @@ export class SceneManager {
   }
 
   render() {
-    this.controls.update();
+    this.controls?.update();
   }
 }

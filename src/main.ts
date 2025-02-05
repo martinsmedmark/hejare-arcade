@@ -15,7 +15,7 @@ async function main() {
   const physicsManager = new PhysicsManager();
 
   // Initialize all managers
-  sceneManager.initialize();
+  sceneManager.initialize({ useOrbitControls: true });
   rendererManager.initialize();
   await Promise.all([
     hejareSvgManager.initialize(),

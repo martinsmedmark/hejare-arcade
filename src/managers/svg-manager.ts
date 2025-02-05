@@ -17,14 +17,14 @@ export class SVGManager {
   private targetSize: number;
   private depth: number = 2; // Keep a fixed depth
   private rotationSpeed = new THREE.Vector3(
-    getRandomValue(-0.5, 0.5),
-    getRandomValue(-0.5, 0.5),
-    getRandomValue(-0.5, 0.5)
+    getRandomValue(-0.8, 0.8),
+    getRandomValue(-0.8, 0.8),
+    getRandomValue(-0.8, 0.8)
   );
   private randomColor = new THREE.Vector3(
-    getRandomValue(0.1, 0.7),
-    getRandomValue(0.1, 0.7),
-    getRandomValue(0.1, 0.7)
+    getRandomValue(0.2, 0.8),
+    getRandomValue(0.2, 0.8),
+    getRandomValue(0.2, 0.8)
   );
 
   public svgGroup: THREE.Group;
