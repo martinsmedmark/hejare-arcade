@@ -4,6 +4,7 @@ import { RendererManager } from "./managers/render-manager";
 import { SVGManager } from "./managers/svg-manager";
 import { ObjectManager } from "./managers/object-manager";
 import { PhysicsManager } from "./managers/physics-manager";
+import { UIManager } from "./managers/ui-manager";
 
 async function main() {
   // Create instances of each manager
@@ -13,6 +14,8 @@ async function main() {
   const arcadeSvgManager = new SVGManager("arcade.svg");
   const objectManager = new ObjectManager();
   const physicsManager = new PhysicsManager();
+
+  new UIManager();
 
   // Initialize all managers
   sceneManager.initialize({ useOrbitControls: true });
