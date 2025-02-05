@@ -90,7 +90,7 @@ class SVGRenderer {
     }
   }
 
-  public render(time: number): void {}
+  // public render(time: number): void {}
 }
 
 export default SVGRenderer;

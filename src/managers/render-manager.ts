@@ -37,7 +37,7 @@ export class RendererManager {
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   }
 
-  render(time: number) {
+  render() {
     // this.renderer.render(this.sceneManager.scene, this.sceneManager.camera);
     this.composer.render();
   }
