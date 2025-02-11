@@ -13,7 +13,9 @@ async function main() {
   const hejareSvgManager = new SVGManager("hejare.svg");
   const arcadeSvgManager = new SVGManager("arcade.svg");
   const objectManager = new ObjectManager();
-  const physicsManager = new PhysicsManager();
+  const physicsManager = new PhysicsManager(sceneManager.camera, {
+    renderFrustumBoxHelper: true,
+  });
 
   new UIManager();
 
@@ -29,6 +31,9 @@ async function main() {
   sceneManager.scene.add(hejareSvgManager.svgGroup);
   sceneManager.scene.add(arcadeSvgManager.svgGroup);
   sceneManager.scene.add(objectManager.objectsGroup);
+  if (physicsManager.frustumBox) {
+    sceneManager.scene.add(physicsManager.frustumBox);
+  }
 
   // Set up a clock for the animation loop
   const clock = new THREE.Clock();
@@ -43,11 +48,7 @@ async function main() {
     hejareSvgManager.render(elapsedTime); // Render SVG-related logic (if any)
     arcadeSvgManager.render(elapsedTime); // Render SVG-related logic (if any)
     objectManager.render(); // Update object rotations and other logic
-    physicsManager.render(
-      sceneManager.camera,
-      hejareSvgManager.svgGroup,
-      hejareSvgManager.size
-    ); // Update physics (e.g., SVG position)
+    physicsManager.render(hejareSvgManager.svgGroup, hejareSvgManager.size); // Update physics (e.g., SVG position)
 
     // Request the next animation frame
     requestAnimationFrame(tick);
